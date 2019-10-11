@@ -1,0 +1,39 @@
+﻿<Window x:Class="HammingCodeGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HammingCodeGenerator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="LightGray">
+    <Window.Resources>
+        <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
+            
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".2*"/>
+            <ColumnDefinition Width=".8*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="데이터 원본"/>
+        <TextBox Grid.Column="1" Text="{Binding OriginalData}"/>
+        <Label Content="해밍코드" Grid.Row="1"/>
+        <Label Content="{Binding HammingCode}" Grid.Row="1" Grid.Column="1"/>
+        <Button Content="해밍코드 생성" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Label Content="수신 데이터" Grid.Row="3"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ReceiveData}"/>
+        <Button Content="수신 데이터 Check" Grid.Row="4" Grid.ColumnSpan="2"/>
+        <Label Content="{Binding InfoMsg}" Grid.Row="5" Grid.ColumnSpan="2"/>
+        <Label Content="{Binding CorrectionData}" Grid.Row="6" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>
