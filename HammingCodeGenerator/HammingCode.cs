@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace HammingCodeGenerator.Models
 {
@@ -72,13 +73,16 @@ namespace HammingCodeGenerator.Models
             }
 
             string hamming_str = Convert.ToString(hamming_code, 2).PadLeft(size, '0');
+            char[] temp_str = hamming_str.ToCharArray();
+            Array.Reverse(temp_str);
+            hamming_str = new string(temp_str);
             return hamming_str;
         }
 
-        public uint CheckHammingCode(ref string hammingCode)
+        public int CheckHammingCode(ref string hammingCode)
         {
             int codeSize = hammingCode.Length;
-            uint correctPos = 0;
+            int correctPos = 0;
             int paritySize = (int)Math.Log(codeSize + 1, 2);
             for (int i = 0; i < paritySize; i++)
             {
@@ -95,16 +99,17 @@ namespace HammingCodeGenerator.Models
                 }
                 if (cnt % 2 != 0)
                 {
-                    correctPos |= (1u << i);
+                    correctPos |= (1 << i);
                 }
             }
             return correctPos;
         }
 
-        public string CorrectionHammingCode(ref string hammingCode)
+        public string CorrectHammingCode(ref string hammingCode, int correctPos)
         {
-            string correctCode = "";
-            return correctCode;
+            StringBuilder sb = new StringBuilder(hammingCode);
+            sb[correctPos - 1] = sb[correctPos - 1] == '0' ? '1' : '0';
+            return sb.ToString();
         }
     }
 }

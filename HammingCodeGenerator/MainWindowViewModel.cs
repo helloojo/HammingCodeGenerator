@@ -6,11 +6,13 @@ namespace HammingCodeGenerator.ViewModels
 {
     class MainWindowViewModel : INotifyPropertyChanged
     {
-        private Models.HammingCode _hamming;
+        private readonly Models.HammingCode _hamming;
 
         public MainWindowViewModel()
         {
             _hamming = new Models.HammingCode();
+            InfoMsg = "Info";
+            CorrectionData = "2진수 형식(01001)으로 입력하세요";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -83,6 +85,11 @@ namespace HammingCodeGenerator.ViewModels
 
         private void GenerateHammingCode()
         {
+            if (_originalData == null || _originalData.Length == 0)
+            {
+                CorrectionData = "데이터를 입력하세요";
+                return;
+            }
             HammingCode = _hamming.GenerateHammingCode(ref _originalData);
         }
 
@@ -94,14 +101,21 @@ namespace HammingCodeGenerator.ViewModels
 
         private void CheckHammingCode()
         {
-            uint CorrectPos = _hamming.CheckHammingCode(ref _receiveData);
-            if (CorrectPos == 0)
+            if (_receiveData == null || _receiveData.Length == 0)
             {
-                InfoMsg = "에러 없음";
+                CorrectionData = "데이터를 입력하세요";
+                return;
+            }
+            int correctPos = _hamming.CheckHammingCode(ref _receiveData);
+            if (correctPos == 0)
+            {
+                InfoMsg = "Info";
+                CorrectionData = "에러 없습니다";
             }
             else
             {
-                InfoMsg = CorrectPos+"번 비트 에러 있음";
+                InfoMsg = correctPos + "번 비트 에러 있음";
+                CorrectionData = _hamming.CorrectHammingCode(ref _receiveData, correctPos);
             }
         }
     }

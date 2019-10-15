@@ -5,20 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HammingCodeGenerator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="LightGray">
+        Title="HammingCodeGenerator" Height="250" Width="500" Background="GhostWhite" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
+        <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,15,0"/>
+            <Setter Property="Padding" Value="0,2"/>
+        </Style>
+        <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="20,0,15,0"/>
+            <Setter Property="Padding" Value="0,5"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
