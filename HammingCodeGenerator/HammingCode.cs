@@ -71,11 +71,7 @@ namespace HammingCodeGenerator.Models
                     hamming_code |= 1u << ((int)Math.Pow(2, j) - 1);
                 }
             }
-
             string hamming_str = Convert.ToString(hamming_code, 2).PadLeft(size, '0');
-            char[] temp_str = hamming_str.ToCharArray();
-            Array.Reverse(temp_str);
-            hamming_str = new string(temp_str);
             return hamming_str;
         }
 
@@ -83,15 +79,15 @@ namespace HammingCodeGenerator.Models
         {
             int codeSize = hammingCode.Length;
             int correctPos = 0;
-            int paritySize = (int)Math.Log(codeSize + 1, 2);
+            double paritySize = (int)Math.Ceiling(Math.Log(codeSize + 1, 2));
             for (int i = 0; i < paritySize; i++)
             {
                 int cnt = 0;
-                for (int j = 1; j <= codeSize; j++)
+                for (int j = 0; j < codeSize; j++)
                 {
-                    if ((j & (1 << i)) != 0)
+                    if (((codeSize-j) & (1 << i)) != 0)
                     {
-                        if (hammingCode[j - 1] == '1')
+                        if (hammingCode[j] == '1')
                         {
                             cnt++;
                         }
@@ -107,8 +103,9 @@ namespace HammingCodeGenerator.Models
 
         public string CorrectHammingCode(ref string hammingCode, int correctPos)
         {
+            int codeSize = hammingCode.Length;
             StringBuilder sb = new StringBuilder(hammingCode);
-            sb[correctPos - 1] = sb[correctPos - 1] == '0' ? '1' : '0';
+            sb[(codeSize-correctPos)] = sb[(codeSize - correctPos)] == '0' ? '1' : '0';
             return sb.ToString();
         }
     }
