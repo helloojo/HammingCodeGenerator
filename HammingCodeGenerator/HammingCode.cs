@@ -7,10 +7,10 @@ namespace HammingCodeGenerator.Models
     {
         private int GetParityBitSize(int dataSize)
         {
-            int left = 1;
+            int left = 0;
             int right = dataSize;
             int paritySize = 0;
-            while (left < right)
+            while (left <= right)
             {
                 int mid = (left + right) / 2;
                 if (Math.Pow(2, mid) >= dataSize + mid + 1)
